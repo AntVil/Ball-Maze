@@ -1,10 +1,14 @@
 :root{
-    --width: min(100vw, calc(100vh * 16 / 9));
-    --height: calc(min(100vw, calc(100vh * 16 / 9)) * 9 / 16);
+    --width: min(95vw, calc(95vh * 16 / 9));
+    --height: calc(min(95vw, calc(95vh * 16 / 9)) * 9 / 16);
 }
 
 body{
     background-color: #333333;
+}
+
+*{
+    color: #FFFFFF;
 }
 
 canvas{
@@ -15,4 +19,27 @@ canvas{
     height: var(--height);
     transform: translate(-50%, -50%);
     background-color: #000000;
+    border-radius: calc(var(--width) * 0.01);
+}
+
+#optionsCheckbox{
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+#options{
+    position: fixed;
+    top: -50%;
+    left: 50%;
+    width: calc(var(--width) * 0.5);
+    height: calc(var(--height) * 0.5);
+    transform: translate(-50%, -50%);
+    background-color: #999999;
+    border-radius: calc(var(--width) * 0.01);
+    transition: top 0.5s;
+}
+
+#optionsCheckbox:checked~#options{
+    top: 50%;
 }

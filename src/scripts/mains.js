@@ -1,7 +1,5 @@
 let game;
 
 window.onload = function(){
-    screen.orientation.lock("landscape").catch(() => {});
-    
-    game = new Game()
+    game = new Game();
 }
