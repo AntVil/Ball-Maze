@@ -23,7 +23,13 @@ function play(){
         .then(permissionState =>{
             if(permissionState === "granted"){
                 window.addEventListener("deviceorientation", (event) => {
-                    document.getElementById("console").innerText = `${event.alpha} ${event.beta}`;
+                    
+                    document.getElementById("console").innerText = "";
+                    
+                    for(let key of Object.keys(event)){
+                        document.getElementById("console").innerText += `${key}, `;
+                    }
+                    //document.getElementById("console").innerText = `${event.alpha} ${event.beta}`;
                 });
             }
         })
