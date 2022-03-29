@@ -5,6 +5,22 @@ let c;
 window.onload = function(){
     orientationHandle();
 
+    if(typeof DeviceMotionEvent.requestPermission === "function"){
+        DeviceMotionEvent.requestPermission()
+        .then(permissionState =>{
+            if(permissionState === "granted"){
+                window.addEventListener("devicemotion", (event) => {
+                    document.getElementById("console").innerText = `${event.alpha} ${event.beta}`;
+                });
+            }
+        })
+        .catch(() => {
+            document.getElementById("console").innerText = "errored";
+        });
+    }else{
+        
+    }
+
     can = document.getElementById("canvas");
     c = can.getContext("2d");
 
@@ -17,23 +33,3 @@ function orientationHandle(){
     document.getElementsByTagName("html")[0].style.transform = `rotate(${-window.orientation - 90}deg)`;
 }
 
-window.addEventListener("deviceorientation", function(event) {
-    let xAngle = event.beta;
-    let yAngle = event.gamma;
-
-    c.strokeStyle = "#00FF00";
-    
-    c.beginPath();
-    c.moveTo(can.width/2, can.height/2);
-    c.lineTo(can.width/2 + 10*Math.cos(xAngle), can.height/2 + 10*Math.sin(xAngle));
-    c.stroke();
-
-    c.strokeStyle = "#FF0000";
-
-    c.beginPath();
-    c.moveTo(can.width/2, can.height/2);
-    c.lineTo(can.width/2 + 10*Math.cos(yAngle), can.height/2 + 10*Math.sin(yAngle));
-    c.stroke();
-
-    console.log(rotateDegrees, leftToRight, frontToBack)
-}, true);
