@@ -5,22 +5,6 @@ let c;
 window.onload = function(){
     orientationHandle();
 
-    if(typeof DeviceMotionEvent.requestPermission === "function"){
-        DeviceMotionEvent.requestPermission()
-        .then(permissionState =>{
-            if(permissionState === "granted"){
-                window.addEventListener("devicemotion", (event) => {
-                    document.getElementById("console").innerText = `${event.alpha} ${event.beta}`;
-                });
-            }
-        })
-        .catch(() => {
-            document.getElementById("console").innerText = "errored";
-        });
-    }else{
-        
-    }
-
     can = document.getElementById("canvas");
     c = can.getContext("2d");
 
@@ -33,3 +17,21 @@ function orientationHandle(){
     document.getElementsByTagName("html")[0].style.transform = `rotate(${-window.orientation - 90}deg)`;
 }
 
+function play(){
+    if(typeof DeviceMotionEvent.requestPermission === "function"){
+        DeviceMotionEvent.requestPermission()
+        .then(permissionState =>{
+            if(permissionState === "granted"){
+                window.addEventListener("devicemotion", (event) => {
+                    document.getElementById("console").innerText = `${event.alpha} ${event.beta}`;
+                });
+            }
+        })
+        .catch((error) => {
+            document.getElementById("console").innerText = `errored: ${error}`;
+        });
+    }else{
+        
+    }
+    console.log("a")
+}
