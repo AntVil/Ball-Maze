@@ -9,7 +9,8 @@ window.onload = function(){
 window.onorientationchange = orientationHandle;
 
 function orientationHandle(){
-    document.getElementsByTagName("html")[0].style.transform = `rotate(${window.orientation - 90}deg)`
+    let orientation = -window.orientation;
+    document.getElementsByTagName("html")[0].style.transform = `rotate(${orientation - 90}deg)`;
 }
 
 window.addEventListener("deviceorientation", function(event) {
