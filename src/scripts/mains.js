@@ -22,7 +22,7 @@ function play(){
         DeviceMotionEvent.requestPermission()
         .then(permissionState =>{
             if(permissionState === "granted"){
-                window.addEventListener("devicemotion", (event) => {
+                window.addEventListener("deviceorientation", (event) => {
                     document.getElementById("console").innerText = `${event.alpha} ${event.beta}`;
                 });
             }
