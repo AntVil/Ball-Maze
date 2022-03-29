@@ -1,0 +1,18 @@
+:root{
+    --width: min(100vw, calc(100vh * 16 / 9));
+    --height: calc(min(100vw, calc(100vh * 16 / 9)) * 9 / 16);
+}
+
+body{
+    background-color: #333333;
+}
+
+canvas{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: var(--width);
+    height: var(--height);
+    transform: translate(-50%, -50%);
+    background-color: #000000;
+}
