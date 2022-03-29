@@ -8,6 +8,28 @@
     --theme-color-5: #FFFFFF;
 }
 
+@media screen and (orientation: portrait) {
+    :root{
+        --width: min(95vh, calc(95vw * 16 / 9));
+        --height: calc(min(95vh, calc(95vw * 16 / 9)) * 9 / 16);
+    }
+
+    html{
+        transform: rotate(-90deg);
+        transform-origin: left top;
+        width: 100vh;
+        height: 100vw;
+        overflow-x: hidden;
+        position: absolute;
+        top: 100%;
+        left: 0;
+    }
+}
+
+html{
+    transition: none;
+}
+
 body{
     background-color: var(--theme-color-2);
 }
