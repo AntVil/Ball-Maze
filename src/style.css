@@ -7,7 +7,7 @@
     --theme-color-4: #AAAAAA;
     --theme-color-5: #FFFFFF;
 }
-/*
+
 @media screen and (orientation: portrait) {
     :root{
         --width: min(95vh, calc(95vw * 16 / 9));
@@ -25,7 +25,7 @@
         left: 0;
     }
 }
-*/
+
 html{
     transition: none;
 }
