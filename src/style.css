@@ -1,6 +1,7 @@
 :root{
     --width: min(95vw, calc(95vh * 16 / 9));
     --height: calc(min(95vw, calc(95vh * 16 / 9)) * 9 / 16);
+    --border-radius: calc(min(95vw, calc(95vh * 16 / 9)) * 0.01);
     --theme-color-1: #000000;
     --theme-color-2: #333333;
     --theme-color-3: #666666;
@@ -12,6 +13,7 @@
     :root{
         --width: min(95vh, calc(95vw * 16 / 9));
         --height: calc(min(95vh, calc(95vw * 16 / 9)) * 9 / 16);
+        --border-radius: calc(min(95vh, calc(95vw * 16 / 9)) * 0.01);
     }
 
     html{
@@ -46,13 +48,28 @@ body{
 header{
     position: fixed;
     left: 50%;
-    top: 50%;
-    width: calc(var(--width) * 0.3);
-    height: calc(var(--height) * 0.3);
+    top: -50%;
+    width: var(--width);
+    height: var(--height);
     transform: translate(-50%, -50%);
     background-color: var(--theme-color-4);
-    border-radius: calc(var(--width) * 0.01);
+    border-radius: var(--border-radius);
     z-index: 1;
+}
+
+#playButton{
+    position: absolute;
+    left: 50%;
+    top: 70%;
+    width: calc(var(--width) * 0.1);
+    height: calc(var(--height) * 0.1);
+    transform: translate(-50%, -50%);
+    background-color: var(--theme-color-2);
+    border: calc(var(--width) * 0.005) solid var(--theme-color-3);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 main{
@@ -63,7 +80,13 @@ main{
     height: var(--height);
     transform: translate(-50%, -50%);
     background-color: var(--theme-color-3);
-    border-radius: calc(var(--width) * 0.01);
+    border-radius: var(--border-radius);
+}
+
+#canvas{
+    width: var(--width);
+    height: var(--height);
+    border-radius: var(--border-radius);
 }
 
 #footerOpen, #footerClose{
@@ -73,16 +96,12 @@ main{
     width: calc(var(--width) * 0.035);
     height: calc(var(--width) * 0.035);
     background-color: var(--theme-color-4);
-    border-radius: calc(var(--width) * 0.01);
+    border-radius: var(--border-radius);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: calc(var(--width) * 0.025);
     font-family: monospace;
-}
-
-#footerCheckbox{
-    display: none;
 }
 
 footer{
@@ -93,13 +112,36 @@ footer{
     height: calc(var(--height) * 0.5);
     transform: translate(-50%, -50%);
     background-color: var(--theme-color-3);
-    border-radius: calc(var(--width) * 0.01);
+    border-radius: var(--border-radius);
 }
 
-#footerCheckbox:checked~footer{
+#quitButton{
+    position: absolute;
+    left: 50%;
+    top: 80%;
+    width: calc(var(--width) * 0.1);
+    height: calc(var(--height) * 0.1);
+    transform: translate(-50%, -50%);
+    background-color: var(--theme-color-2);
+    border: calc(var(--width) * 0.005) solid var(--theme-color-3);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#showNoneCheckbox, #showHeaderCheckbox, #showFooterCheckbox{
+    display: none;
+}
+
+#showFooterCheckbox:checked~footer{
     top: 50%;
 }
 
-#footerCheckbox:checked~main{
+#showFooterCheckbox:checked~main{
     filter: brightness(70%);
+}
+
+#showHeaderCheckbox:checked~header{
+    top: 50%;
 }

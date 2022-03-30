@@ -1,3 +1,6 @@
+const UPDATE_RATE_PER_SECOND = 60;
+const GAME_RESOLUTION = 10;
+
 let game;
 let can;
 let c;
@@ -9,6 +12,9 @@ window.onload = function(){
     c = can.getContext("2d");
 
     game = new Game();
+
+    setInterval(updateLoop, 1000 / UPDATE_RATE_PER_SECOND);
+    requestAnimationFrame(renderLoop);
 }
 
 window.onorientationchange = orientationHandle;
@@ -17,16 +23,11 @@ function orientationHandle(){
     document.getElementsByTagName("html")[0].style.transform = `rotate(${-window.orientation - 90}deg)`;
 }
 
-
-function handleOrientation(event) {
-    document.getElementById("console").innerText = `${event.alpha} ${event.beta} ${event.gamma}`;
+function updateLoop(){
+    game.update();
 }
 
-function play() {
-    if (DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function") {
-        DeviceMotionEvent.requestPermission();
-    }
-
-    window.addEventListener("deviceorientation", handleOrientation);
-    
-};
+function renderLoop(){
+    game.render();
+    requestAnimationFrame(renderLoop);
+}

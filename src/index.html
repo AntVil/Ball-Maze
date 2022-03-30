@@ -10,25 +10,31 @@
         <link rel="stylesheet" href="./style.css">
 
         <script src="./scripts/mains.js"></script>
+        <script src="./scripts/InputHandler.js"></script>
+        <script src="./scripts/ScreenHandler.js"></script>
         <script src="./scripts/Game.js"></script>
+        <script src="./scripts/Ball.js"></script>
     </head>
     <body>
+        <input id="showNoneCheckbox" type="radio" name="windowCheckboxes" />
+        <input id="showHeaderCheckbox" type="radio" name="windowCheckboxes" checked />
+        <input id="showFooterCheckbox" type="radio" name="windowCheckboxes" />
+        
         <header>
-            <button onmousedown="play()">&#9658;</button>
+            <label id="playButton" for="showNoneCheckbox" onmousedown="game.play()">&#9658;</label>
         </header>
 
-        <input id="footerCheckbox" type="checkbox" />
-        
         <main>
-            <span id="console"></span>
             <canvas id="canvas"></canvas>
 
-            <label id="footerOpen" for="footerCheckbox">&#9881;</label>
+            <label id="footerOpen" for="showFooterCheckbox">&#9881;</label>
         </main>
 
         <footer>
-            <label id="footerClose" for="footerCheckbox">&times;</label>
-
+            <label id="footerClose" for="showNoneCheckbox">&times;</label>
+            
+            
+            <label id="quitButton" for="showHeaderCheckbox" onmousedown="game.quit()">quit</label>
         </footer>
     </body>
 </html>
