@@ -26,7 +26,7 @@ class Game{
     }
 
     play(){
-        
+        this.inputHandler.start();
     }
 
     quit(){
