@@ -1,7 +1,7 @@
 class Ball{
     constructor(){
-        this.x = 0;
-        this.y = 0;
+        this.x = GAME_RESOLUTION * 8;
+        this.y = GAME_RESOLUTION * 3.5;
         this.xSpeed = 0;
         this.ySpeed = 0;
     }

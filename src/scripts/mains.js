@@ -1,5 +1,5 @@
 const UPDATE_RATE_PER_SECOND = 60;
-const GAME_RESOLUTION = 10;
+const GAME_RESOLUTION = 100;
 
 let game;
 let can;

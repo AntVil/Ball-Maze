@@ -20,8 +20,8 @@ class Game{
     }
 
     update(){
-        let xForce = this.inputHandler.xAngle;
-        let yForce = this.inputHandler.yAngle;
+        let xForce = 0.01 * this.inputHandler.xAngle;
+        let yForce = 0.01 * this.inputHandler.yAngle;
         this.ball.applyForce(xForce, yForce);
     }
 
