@@ -57,13 +57,12 @@ class Ball{
         }
     }
 
-    boundOutside(x1, y1, x2, y2){
+    boundOutsideEdges(x1, y1, x2, y2){
         let a1 = this.x - this.r;
         let b1 = this.y - this.r;
         let a2 = this.x + this.r;
         let b2 = this.y + this.r;
 
-        // edges
         if(x1 < this.x && this.x < x2){
             if(y1 < b1 && b1 < y2){
                 this.y = y2 + this.r;
@@ -83,8 +82,9 @@ class Ball{
                 this.xSpeed *= -1;
             }
         }
+    }
 
-        // corners
+    boundOutsideCorners(x1, y1, x2, y2){
         if(Math.hypot(y1 - this.y, x1 - this.x) < this.r){
             let angle = Math.atan2(y1 - this.y, x1 - this.x);
             this.x = x1 - Math.cos(angle) * this.r;

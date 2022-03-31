@@ -50,7 +50,12 @@ class Game{
             
             for(let block of this.blocks){
                 let [x1, y1, x2, y2] = block.getBounds();
-                this.ball.boundOutside(x1, y1, x2, y2);
+                this.ball.boundOutsideEdges(x1, y1, x2, y2);
+            }
+            
+            for(let block of this.blocks){
+                let [x1, y1, x2, y2] = block.getBounds();
+                this.ball.boundOutsideCorners(x1, y1, x2, y2);
             }
         }
     }
