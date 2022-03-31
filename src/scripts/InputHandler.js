@@ -1,7 +1,8 @@
 class InputHandler{
     constructor(){
-        this.xAngle = 0;
-        this.yAngle = 0;
+        this.xOrientation = 0;
+        this.yOrientation = 0;
+        this.orientationSensitivity = document.getElementById("orientationSensitivity");
     }
 
     start(){
@@ -10,8 +11,16 @@ class InputHandler{
         }
     
         window.addEventListener("deviceorientation", event => {
-            this.xAngle = -event.beta;
-            this.yAngle = event.gamma;
+            this.xOrientation = -event.beta / 90;
+            this.yOrientation = event.gamma / 90;
         });
+    }
+
+    getForce(){
+        let sensitivity = parseFloat(this.orientationSensitivity.value);
+        return [
+            this.xOrientation * sensitivity,
+            this.yOrientation * sensitivity
+        ];
     }
 }
