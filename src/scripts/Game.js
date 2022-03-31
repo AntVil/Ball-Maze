@@ -4,8 +4,8 @@ class Game{
         this.inputHandler = new InputHandler();
         this.ball = new Ball();
         let canvas = document.getElementById("canvas");
-        canvas.width = 16 * GAME_RESOLUTION;
-        canvas.height = 9 * GAME_RESOLUTION;
+        canvas.width = CANVAS_WIDTH;
+        canvas.height = CANVAS_HEIGHT;
         this.ctxt = canvas.getContext("2d");
 
         this.ctxt.strokeStyle = "#FF0000";
@@ -16,6 +16,7 @@ class Game{
     }
 
     render(){
+        this.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
         this.ball.render(this.ctxt);
     }
 

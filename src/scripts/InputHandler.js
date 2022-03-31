@@ -10,7 +10,7 @@ class InputHandler{
         }
     
         window.addEventListener("deviceorientation", event => {
-            this.xAngle = event.beta;
+            this.xAngle = -event.beta;
             this.yAngle = event.gamma;
         });
     }
