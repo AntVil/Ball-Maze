@@ -21,5 +21,8 @@ class Ball{
     update(){
         this.x += this.xSpeed;
         this.y += this.ySpeed;
+
+        this.xSpeed *= 0.9;
+        this.ySpeed *= 0.9;
     }
 }
