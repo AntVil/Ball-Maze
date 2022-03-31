@@ -8,8 +8,18 @@ class Game{
         this.ball = new Ball(
             this.xBound / 2,
             this.yBound / 2,
-            (this.xBound * this.yBound) / (9 * 16 * 2),
+            this.xBound / 40,
         );
+
+        this.blocks = [];
+        for(let i=0;i<20;i++){
+            this.blocks.push(new Block(
+                Math.floor(Math.random() * this.xBound) - 0.5,
+                Math.floor(Math.random() * this.yBound) - 0.5,
+                1,
+                1
+            ));
+        }
 
         let canvas = document.getElementById("canvas");
         canvas.width = CANVAS_WIDTH;
@@ -23,6 +33,10 @@ class Game{
         this.ctxt.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
         this.ball.render(this.ctxt);
+
+        for(let block of this.blocks){
+            block.render(this.ctxt);
+        }
     }
 
     update(){
@@ -31,7 +45,13 @@ class Game{
             this.ball.applyForce(xForce, yForce);
             this.ball.applyFriction(BALL_FRICTION);
             this.ball.updatePosition();
+            
             this.ball.boundInside(0, 0, this.xBound, this.yBound);
+            
+            for(let block of this.blocks){
+                let [x1, y1, x2, y2] = block.getBounds();
+                this.ball.boundOutside(x1, y1, x2, y2);
+            }
         }
     }
 
@@ -41,5 +61,9 @@ class Game{
 
     quit(){
         
+    }
+
+    generateMap(){
+
     }
 }

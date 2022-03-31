@@ -1,18 +1,15 @@
 const UPDATE_RATE_PER_SECOND = 60;
 const GAME_RESOLUTION = 100;
-const CANVAS_WIDTH = 16 * GAME_RESOLUTION;
-const CANVAS_HEIGHT = 9 * GAME_RESOLUTION;
+const MAP_WIDTH = 16;
+const MAP_HEIGHT = 9;
+const CANVAS_WIDTH = MAP_WIDTH * GAME_RESOLUTION;
+const CANVAS_HEIGHT = MAP_HEIGHT * GAME_RESOLUTION;
 const BALL_FRICTION = 0.99;
 
 let game;
-let can;
-let c;
 
 window.onload = function(){
     orientationHandle();
-
-    can = document.getElementById("canvas");
-    c = can.getContext("2d");
 
     game = new Game();
 
