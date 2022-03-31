@@ -16,7 +16,7 @@ class Game{
     }
 
     render(){
-        this.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
+        this.ctxt.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
         this.ball.render(this.ctxt);
     }
 
