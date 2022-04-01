@@ -21,13 +21,8 @@ class Ball{
     }
 
     applyForce(xForce, yForce){
-        this.xSpeed += xForce;
-        this.ySpeed += yForce;
-    }
-
-    applyFriction(friction){
-        this.xSpeed *= friction;
-        this.ySpeed *= friction;
+        this.xSpeed = (this.xSpeed + xForce) * BALL_CONSTANT_FRICTION;
+        this.ySpeed = (this.ySpeed + yForce) * BALL_CONSTANT_FRICTION;
     }
 
     updatePosition(){
@@ -38,22 +33,22 @@ class Ball{
     boundInside(x1, y1, x2, y2){
         if(this.x - this.r < x1){
             this.x = x1 + this.r;
-            this.xSpeed *= -1;
+            this.xSpeed *= -BALL_COLLISON_FRICTION;
         }
 
         if(this.y - this.r < y1){
             this.y = y1 + this.r;
-            this.ySpeed *= -1;
+            this.ySpeed *= -BALL_COLLISON_FRICTION;
         }
 
         if(this.x + this.r > x2){
             this.x = x2 - this.r;
-            this.xSpeed *= -1;
+            this.xSpeed *= -BALL_COLLISON_FRICTION;
         }
 
         if(this.y + this.r > y2){
             this.y = y2 - this.r;
-            this.ySpeed *= -1;
+            this.ySpeed *= -BALL_COLLISON_FRICTION;
         }
     }
 
@@ -66,20 +61,20 @@ class Ball{
         if(x1 < this.x && this.x < x2){
             if(y1 < b1 && b1 < y2){
                 this.y = y2 + this.r;
-                this.ySpeed *= -1;
+                this.ySpeed *= -BALL_COLLISON_FRICTION;
             }else if(y1 < b2 && b2 < y2){
                 this.y = y1 - this.r;
-                this.ySpeed *= -1;
+                this.ySpeed *= -BALL_COLLISON_FRICTION;
             }
         }
 
         if(y1 < this.y && this.y < y2){
             if(x1 < a1 && a1 < x2){
                 this.x = x2 + this.r;
-                this.xSpeed *= -1;
+                this.xSpeed *= -BALL_COLLISON_FRICTION;
             }else if(x1 < a2 && a2 < x2){
                 this.x = x1 - this.r;
-                this.xSpeed *= -1;
+                this.xSpeed *= -BALL_COLLISON_FRICTION;
             }
         }
     }
@@ -93,8 +88,8 @@ class Ball{
             let x = this.x - x1;
             let y = this.y - y1;
             let c = -2 * (this.xSpeed * x + this.ySpeed * y) / (x * x + y * y);
-            this.xSpeed = this.xSpeed + c * x;
-            this.ySpeed = this.ySpeed + c * y;
+            this.xSpeed += c * x * BALL_COLLISON_FRICTION;
+            this.ySpeed += c * y * BALL_COLLISON_FRICTION;
 
         }
 
@@ -106,8 +101,8 @@ class Ball{
             let x = this.x - x2;
             let y = this.y - y1;
             let c = -2 * (this.xSpeed * x + this.ySpeed * y) / (x * x + y * y);
-            this.xSpeed = this.xSpeed + c * x;
-            this.ySpeed = this.ySpeed + c * y;
+            this.xSpeed += c * x * BALL_COLLISON_FRICTION;
+            this.ySpeed += c * y * BALL_COLLISON_FRICTION;
         }
 
         if(Math.hypot(y2 - this.y, x1 - this.x) < this.r){
@@ -118,8 +113,8 @@ class Ball{
             let x = this.x - x1;
             let y = this.y - y2;
             let c = -2 * (this.xSpeed * x + this.ySpeed * y) / (x * x + y * y);
-            this.xSpeed = this.xSpeed + c * x;
-            this.ySpeed = this.ySpeed + c * y;
+            this.xSpeed += c * x * BALL_COLLISON_FRICTION;
+            this.ySpeed += c * y * BALL_COLLISON_FRICTION;
         }
 
         if(Math.hypot(y2 - this.y, x2 - this.x) < this.r){
@@ -130,8 +125,8 @@ class Ball{
             let x = this.x - x2;
             let y = this.y - y2;
             let c = -2 * (this.xSpeed * x + this.ySpeed * y) / (x * x + y * y);
-            this.xSpeed = this.xSpeed + c * x;
-            this.ySpeed = this.ySpeed + c * y;
+            this.xSpeed += c * x * BALL_COLLISON_FRICTION;
+            this.ySpeed += c * y * BALL_COLLISON_FRICTION;
         }
     }
 }

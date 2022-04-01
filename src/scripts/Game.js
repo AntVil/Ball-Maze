@@ -1,21 +1,20 @@
 class Game{
     constructor(){
-        this.xBound = CANVAS_WIDTH / GAME_RESOLUTION;
-        this.yBound = CANVAS_HEIGHT / GAME_RESOLUTION;
         this.screenHandler = new ScreenHandler();
         this.inputHandler = new InputHandler();
+        this.map = new GameMap();
         
         this.ball = new Ball(
-            this.xBound / 2,
-            this.yBound / 2,
-            this.xBound / 40,
+            MAP_WIDTH / 2,
+            MAP_HEIGHT / 2,
+            MAP_WIDTH / 64,
         );
 
         this.blocks = [];
-        for(let i=0;i<20;i++){
+        for(let i=0;i<100;i++){
             this.blocks.push(new Block(
-                Math.floor(Math.random() * this.xBound) - 0.5,
-                Math.floor(Math.random() * this.yBound) - 0.5,
+                Math.floor(Math.random() * MAP_WIDTH) - 0.5,
+                Math.floor(Math.random() * MAP_HEIGHT) - 0.5,
                 1,
                 1
             ));
@@ -43,10 +42,9 @@ class Game{
         if(!this.screenHandler.isPaused()){
             let [xForce, yForce] = this.inputHandler.getForce();
             this.ball.applyForce(xForce, yForce);
-            this.ball.applyFriction(BALL_FRICTION);
             this.ball.updatePosition();
             
-            this.ball.boundInside(0, 0, this.xBound, this.yBound);
+            this.ball.boundInside(0, 0, MAP_WIDTH, MAP_HEIGHT);
             
             for(let block of this.blocks){
                 let [x1, y1, x2, y2] = block.getBounds();
@@ -62,13 +60,10 @@ class Game{
 
     play(){
         this.inputHandler.start();
+        this.blocks = this.map.generateMap();
     }
 
     quit(){
         
-    }
-
-    generateMap(){
-
     }
 }
