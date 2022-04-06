@@ -13,7 +13,7 @@ const WOOD_TEXTURE_WIDTH = 6779;
 const WOOD_TEXTURE_HEIGHT = 4466;
 const WOOD_TEXTURE = new Image(WOOD_TEXTURE_WIDTH, WOOD_TEXTURE_HEIGHT);
 WOOD_TEXTURE.src = "./images/wood.jpg";
-const SHADOW_STRENGTH = 3;
+const SHADOW_STRENGTH = 9;
 const BALL_TEXTURE = new Image();
 BALL_TEXTURE.src = "./images/ball.png";
 
