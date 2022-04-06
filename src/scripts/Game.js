@@ -29,12 +29,57 @@ class Game{
     }
 
     render(){
-        this.ctxt.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        if(!this.screenHandler.isPaused()){
+            this.ctxt.filter = "brightness(80%)";
+            this.ctxt.drawImage(WOOD_TEXTURE, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+            this.ctxt.filter = "none";
+            
+            let [shadowX, shadowY] = this.inputHandler.getForce();
+            shadowX *= GAME_RESOLUTION * SHADOW_STRENGTH;
+            shadowY *= GAME_RESOLUTION * SHADOW_STRENGTH;
+            let angle = Math.atan2(shadowY, shadowX);
 
-        this.ball.render(this.ctxt);
+            this.ctxt.fillStyle = "#222222";
+            this.ctxt.beginPath();
+            this.ctxt.moveTo(0, 0);
+            this.ctxt.lineTo(shadowX, shadowY);
+            this.ctxt.lineTo(CANVAS_WIDTH + shadowX, shadowY);
+            this.ctxt.lineTo(CANVAS_WIDTH, 0);
+            this.ctxt.fill();
 
-        for(let block of this.blocks){
-            block.render(this.ctxt);
+            this.ctxt.beginPath();
+            this.ctxt.moveTo(0, 0);
+            this.ctxt.lineTo(shadowX, shadowY);
+            this.ctxt.lineTo(shadowX, CANVAS_HEIGHT + shadowY);
+            this.ctxt.lineTo(0, CANVAS_HEIGHT);
+            this.ctxt.fill();
+
+            this.ctxt.beginPath();
+            this.ctxt.moveTo(CANVAS_WIDTH, 0);
+            this.ctxt.lineTo(CANVAS_WIDTH + shadowX, shadowY);
+            this.ctxt.lineTo(CANVAS_WIDTH + shadowX, CANVAS_HEIGHT + shadowY);
+            this.ctxt.lineTo(CANVAS_WIDTH, CANVAS_HEIGHT);
+            this.ctxt.fill();
+
+            this.ctxt.beginPath();
+            this.ctxt.moveTo(0, CANVAS_HEIGHT);
+            this.ctxt.lineTo(shadowX, CANVAS_HEIGHT + shadowY);
+            this.ctxt.lineTo(CANVAS_WIDTH + shadowX, CANVAS_HEIGHT + shadowY);
+            this.ctxt.lineTo(CANVAS_WIDTH, CANVAS_HEIGHT);
+            this.ctxt.fill();
+
+            for(let block of this.blocks){
+                block.renderShadow(this.ctxt, shadowX, shadowY);
+            }
+
+            this.ball.renderShadow(this.ctxt, shadowX, shadowY);
+
+            this.ball.render(this.ctxt, angle);
+
+            
+            for(let block of this.blocks){
+                block.render(this.ctxt);
+            }
         }
     }
 

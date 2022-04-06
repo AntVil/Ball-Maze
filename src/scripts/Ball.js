@@ -7,17 +7,32 @@ class Ball{
         this.ySpeed = 0;
     }
 
-    render(ctxt){
-        ctxt.fillStyle = "#0000FF";
+    renderShadow(ctxt, stepX, stepY){
         ctxt.beginPath();
         ctxt.arc(
-            this.x * GAME_RESOLUTION,
-            this.y * GAME_RESOLUTION,
+            this.x * GAME_RESOLUTION + stepX,
+            this.y * GAME_RESOLUTION + stepY,
             this.r * GAME_RESOLUTION,
             0,
             2*Math.PI
         );
         ctxt.fill();
+    }
+
+    render(ctxt, angle){
+        ctxt.translate(this.x * GAME_RESOLUTION, this.y * GAME_RESOLUTION);
+        ctxt.rotate(angle - Math.PI/2);
+        ctxt.translate(-this.x * GAME_RESOLUTION, -this.y * GAME_RESOLUTION);
+
+        ctxt.drawImage(
+            BALL_TEXTURE,
+            (this.x - this.r) * GAME_RESOLUTION,
+            (this.y - this.r) * GAME_RESOLUTION,
+            2 * this.r * GAME_RESOLUTION,
+            2 * this.r * GAME_RESOLUTION
+        );
+
+        ctxt.resetTransform();
     }
 
     applyForce(xForce, yForce){

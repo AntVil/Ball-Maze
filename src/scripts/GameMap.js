@@ -81,10 +81,6 @@ class GameMap{
                 trace.shift();
             }
         }
-        
-        const BLOCK_WIDTH = 0.1;
-        const WALL_SIZE = 1;
-        const WALL_CHANCE = 0.8;
 
         let blocks = [];
         for(let y=0;y<grid.length;y++){
